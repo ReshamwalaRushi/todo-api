@@ -26,6 +26,9 @@ db.connect((err) => {
     console.log('MySQL connected...');
 });
 
+router.get("/", (req, res) => {
+    res.send("App is running..");
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
