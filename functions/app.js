@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/api', routes);
+// app.use('/api', routes);
 
 const db = mysql.createConnection(config.mysql);
 
@@ -30,5 +30,5 @@ db.connect((err) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-// app.use("/.netlify/functions/app", routes);
+app.use("/.netlify/functions/app", routes);
 module.exports.handler = serverless(app);
