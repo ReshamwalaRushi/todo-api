@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
-const routes = require('./src/routes');
-const config = require('./src/database/config');
+const routes = require('../src/routes');
+const config = require('../src/database/config');
 const cors = require('cors');
+const router = express.Router();
+const serverless = require("serverless-http");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,3 +30,5 @@ db.connect((err) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+app.use("/.netlify/functions/app", router);
+module.exports.handler = serverless(app);
